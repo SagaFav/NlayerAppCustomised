@@ -6,3 +6,6 @@ Remove IOCContaner change to autofac;
 repositories by using EF CodeFirst;
 
 easy to use 
+
+original version is
+https://github.com/antgerasim/NLayerAppV2
