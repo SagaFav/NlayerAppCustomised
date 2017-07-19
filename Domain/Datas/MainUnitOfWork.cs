@@ -58,7 +58,7 @@ namespace Domain.Datas
         #endregion
 
         #region IQueryableUnitOfWork Members
-
+      
         public DbSet<TEntity> CreateSet<TEntity>()
             where TEntity : class
         {
@@ -182,6 +182,8 @@ namespace Domain.Datas
             //just for performance
             this.Configuration.AutoDetectChangesEnabled = false;
             this.Configuration.LazyLoadingEnabled = false;
+            this.Configuration.ProxyCreationEnabled = false;
+            this.Configuration.ValidateOnSaveEnabled = false;
         }
         #endregion
 
