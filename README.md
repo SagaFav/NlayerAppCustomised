@@ -41,5 +41,7 @@ ex:
 	_repository.GetFiltered<TABLEOBJ>(t=>t.Id>10, t=>t.UpdateTime, false, "column1","column2","column3"....).ToList();
 
 it's more easy to use and has a higher performance!
+
 The NlayerApp original version is:
+
 https://github.com/antgerasim/NLayerAppV2
