@@ -1,7 +1,7 @@
 # NlayerAppCustomised
 replace WCF by WEBAPI;
 Remove AutoMapper (too slow);
-replace IOCContaner by autofac;
+replace Unity by autofac;
 orm by using EF CodeFirst;
 
 easy to use 
