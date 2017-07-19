@@ -92,7 +92,7 @@ namespace Domain.Datas
         /// <param name="orderByExpression">排序属性</param>
         /// <param name="ascending">是否倒序</param>
         /// <returns></returns>
-        IEnumerable<TEntity> GetPaged<KProperty>(int pageIndex, int pageCount, Expression<Func<TEntity, bool>> filter, string[] includeExpression, Expression<Func<TEntity, KProperty>> orderByExpression, bool ascending);
+        IEnumerable<TEntity> GetPaged<KProperty>(int pageIndex, int pageCount, Expression<Func<TEntity, bool>> filter,  Expression<Func<TEntity, KProperty>> orderByExpression, bool ascending,string[] includeExpression);
         /// <summary>
         /// 获取数量
         /// </summary>

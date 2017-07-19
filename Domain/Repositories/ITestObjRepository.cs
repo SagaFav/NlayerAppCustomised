@@ -10,6 +10,6 @@ namespace Domain.Repositories
 {
     public interface ITestObjRepository : IRepository<TestObjs>
     {
-        void Test();
+        void AddForeign(TestForeign obj);
     }
 }

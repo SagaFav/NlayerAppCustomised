@@ -37,7 +37,7 @@ namespace Domain.Datas
         public MainUnitOfWork()
             : base("name=DbConn")
         {
-            //防止首次运行过慢
+            //first Time warmUp
             var objectContext = ((IObjectContextAdapter)this).ObjectContext;
             var mappingCollection = (StorageMappingItemCollection)objectContext.MetadataWorkspace.GetItemCollection(DataSpace.CSSpace);
             mappingCollection.GenerateViews(new List<EdmSchemaError>());
@@ -47,6 +47,11 @@ namespace Domain.Datas
         public IDbSet<TestObjs> TBL_TEST
         {
             get { return _testObj ?? base.Set<TestObjs>(); }
+        }
+        IDbSet<TestForeign> _testForeignObj = null;
+        public IDbSet<TestForeign> TBL_TESTFOREIGN
+        {
+            get { return _testForeignObj ?? base.Set<TestForeign>(); }
         }
         #endregion
 
@@ -58,7 +63,7 @@ namespace Domain.Datas
             return base.Set<TEntity>();
         }
         //自对象加载到上下文中后，或自上次调用 System.Data.Objects.ObjectContext.SaveChanges() 方法后，此对象尚未经过修改；
-        public void Attach<TEntity>(TEntity item)
+        public void SetUnchanged<TEntity>(TEntity item)
             where TEntity : class
         {
             //attach and set as unchanged
@@ -172,7 +177,9 @@ namespace Domain.Datas
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
-            base.Configuration.LazyLoadingEnabled = false;//禁用延迟加载减少数据库读取频率 实际按照需求预加载include
+            //just for performance
+            this.Configuration.AutoDetectChangesEnabled = false;
+            this.Configuration.LazyLoadingEnabled = false;
         }
         #endregion
 

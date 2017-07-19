@@ -62,7 +62,7 @@ namespace Domain.Datas
             else
             {
                 LoggerFactory.CreateLog()
-                          .LogInfo("不能增加空实体",typeof(TEntity).ToString());
+                          .LogInfo("can not add null object",typeof(TEntity).ToString());
                 
             }
             
@@ -76,7 +76,7 @@ namespace Domain.Datas
             if (item != (TEntity)null)
             {
                 //attach item if not exist
-                _UnitOfWork.Attach(item);
+                _UnitOfWork.SetUnchanged(item);
 
                 //set as "removed"
                 GetSet().Remove(item);
@@ -84,7 +84,7 @@ namespace Domain.Datas
             else
             {
                 LoggerFactory.CreateLog()
-                          .LogInfo("不能移除空实体", typeof(TEntity).ToString());
+                          .LogInfo("entity is null", typeof(TEntity).ToString());
             }
         }
 
@@ -95,11 +95,11 @@ namespace Domain.Datas
         public virtual void TrackItem(TEntity item)
         {
             if (item != (TEntity)null)
-                _UnitOfWork.Attach<TEntity>(item);
+                _UnitOfWork.SetUnchanged<TEntity>(item);
             else
             {
                 LoggerFactory.CreateLog()
-                          .LogInfo("不能附加空实体", typeof(TEntity).ToString());
+                          .LogInfo("entity is null", typeof(TEntity).ToString());
             }
         }
 
@@ -114,7 +114,7 @@ namespace Domain.Datas
             else
             {
                 LoggerFactory.CreateLog()
-                          .LogInfo("不能修改空实体", typeof(TEntity).ToString());
+                          .LogInfo("entity is null", typeof(TEntity).ToString());
             }
         }
 
@@ -167,7 +167,7 @@ namespace Domain.Datas
         /// </summary>
         /// <param name="specification"><see cref="Microsoft.Samples.NLayerApp.Domain.Seedwork.IRepository{TValueObject}"/></param>
         /// <returns><see cref="Microsoft.Samples.NLayerApp.Domain.Seedwork.IRepository{TValueObject}"/></returns>
-        public virtual IEnumerable<TEntity> GetPaged<KProperty>(int pageIndex, int pageCount, Expression<Func<TEntity, bool>> filter, string[] includeExpression, Expression<Func<TEntity, KProperty>> orderByExpression, bool ascending)
+        public virtual IEnumerable<TEntity> GetPaged<KProperty>(int pageIndex, int pageCount, Expression<Func<TEntity, bool>> filter,  Expression<Func<TEntity, KProperty>> orderByExpression, bool ascending,string[] includeExpression)
         {
             IDbSet<TEntity> set = GetSet();
             IQueryable<TEntity> result = set.AsQueryable();
@@ -252,7 +252,7 @@ namespace Domain.Datas
                 catch (Exception e)
                 {
                     LoggerFactory.CreateLog()
-                          .LogInfo("对象释放失败",e.Message);
+                          .LogInfo("dispose failed",e.Message);
                 }
             }
         }

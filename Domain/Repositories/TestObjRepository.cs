@@ -20,11 +20,10 @@ namespace Domain.Repositories
             _unitofwork = unitofwork as MainUnitOfWork;
         }
 
-
-
-        public void Test()
+        public void AddForeign(TestForeign obj)
         {
-            throw new NotImplementedException();
+            _unitofwork.TBL_TESTFOREIGN.Add(obj);
+            _unitofwork.SetAdded(obj);
         }
     }
 }

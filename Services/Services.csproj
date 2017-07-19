@@ -143,6 +143,8 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Global.asax" />
+    <Content Include="Index.html" />
+    <Content Include="jquery.min.js" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>

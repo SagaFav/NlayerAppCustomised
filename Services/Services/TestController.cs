@@ -1,4 +1,5 @@
 ﻿
+using Application.DTO;
 using Application.TestModule;
 using Domain.Models;
 using Infrastructure.Log;
@@ -20,13 +21,20 @@ namespace Services
             _app = app;
         }
         [HttpGet]
-        public async Task<List<TestObjs>> GetAll()
+        public List<TestDTO> GetAll()
         {
-            var result = await Task.Run(() =>
-            {
-                return _app.Getall();
-            });
-            return result;
+            return _app.Getall();
+        }
+
+        [HttpPost]
+        public void Add(TestDTO obj)
+        {
+            _app.Add(obj);
+        }
+        [HttpPost]
+        public void AddForeign(TestForeign obj)
+        {
+            _app.AddTestForeign(obj);
         }
     }
 }
