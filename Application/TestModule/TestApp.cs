@@ -20,7 +20,7 @@ namespace Application.TestModule
         }
         public List<TestDTO> Getall()
         {
-            return _repository.GetAll().Select(s=>TestConvertor.ConvertToDTO(s)).ToList();
+            return _repository.GetAll("TestForeign").Select(s => TestConvertor.ConvertToDTO(s)).ToList();
         }
         public void Update(TestDTO obj)
         {
