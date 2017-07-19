@@ -41,6 +41,8 @@ namespace Domain.Datas
             var objectContext = ((IObjectContextAdapter)this).ObjectContext;
             var mappingCollection = (StorageMappingItemCollection)objectContext.MetadataWorkspace.GetItemCollection(DataSpace.CSSpace);
             mappingCollection.GenerateViews(new List<EdmSchemaError>());
+            Database.SetInitializer(new DropCreateDatabaseIfModelChanges<MainUnitOfWork>());//保护数据建议使用数据库迁移工具
+            Database.CreateIfNotExists();
         }
         #region IDbSet Members
         IDbSet<TestObjs> _testObj = null;

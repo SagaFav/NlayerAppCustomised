@@ -1,4 +1,6 @@
-﻿using Application.DTO;
+﻿
+
+using Application.DTO;
 using Domain.Models;
 using System;
 using System.Collections.Generic;
@@ -12,7 +14,7 @@ namespace Application.TestModule
     {
         List<TestDTO> Getall();
         void Update(TestDTO obj);
-        void Add(TestDTO obj);
-        void AddTestForeign(TestForeign dto);
+        string Add(TestDTO obj);
+        string AddTestForeign(TestForeign dto);
     }
 }

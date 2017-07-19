@@ -1,4 +1,6 @@
-﻿using Application.DTO;
+﻿
+
+using Application.DTO;
 using Domain.Models;
 using Domain.Repositories;
 using System;
@@ -18,26 +20,28 @@ namespace Application.TestModule
         }
         public List<TestDTO> Getall()
         {
-            return _repository.GetAll().Select(s=>new TestDTO(s)).ToList();
+            return _repository.GetAll().Select(s=>TestConvertor.ConvertToDTO(s)).ToList();
         }
         public void Update(TestDTO obj)
         {
-            var current=_repository.Get(obj.Id);
-            obj.TestForeign = current.TestForeign;
-            _repository.Merge(obj, current);
+            var persist = _repository.Get(obj.Id);
+            obj.TestForeign = persist.TestForeign;
+            _repository.Merge(persist,obj);
             _repository.UnitOfWork.Commit();
         }
-        public void Add(TestDTO obj)
+        public string Add(TestDTO obj)
         {
             obj.GenerateNewIdentity();
-            _repository.Add(obj);
+            _repository.Add(TestConvertor.ConvertToEntity(obj));
             _repository.UnitOfWork.Commit();
+            return obj.Id;
         }
-        public void AddTestForeign(TestForeign dto)
+        public string AddTestForeign(TestForeign dto)
         {
             dto.GenerateNewIdentity();
             _repository.AddForeign(dto);
             _repository.UnitOfWork.Commit();
+            return dto.Id;
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿
+
 using Application.DTO;
 using Application.TestModule;
 using Domain.Models;
@@ -27,14 +28,19 @@ namespace Services
         }
 
         [HttpPost]
-        public void Add(TestDTO obj)
+        public string Add(TestDTO obj)
         {
-            _app.Add(obj);
+            return _app.Add(obj);
         }
         [HttpPost]
-        public void AddForeign(TestForeign obj)
+        public void Update(TestDTO obj)
         {
-            _app.AddTestForeign(obj);
+            _app.Update(obj);
+        }
+        [HttpPost]
+        public string AddForeign(TestForeign obj)
+        {
+            return _app.AddTestForeign(obj);
         }
     }
 }
