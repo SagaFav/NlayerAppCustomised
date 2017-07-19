@@ -22,7 +22,7 @@ ValidateOnSaveEnabled = false;
 Add GetPaged Functions and Count Functions
 
 
-use Include params According to the query:
+use Include params when a query requires navigational properties:
 
 GetAll(params string[] include)
 
