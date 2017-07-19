@@ -1,0 +1,58 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title></title>
+</head>
+<body>
+    <div id="msg"></div>
+    <script src="jquery.min.js"></script>
+    <script>
+        $.ajax({
+            url:'/test/AddForeign',
+            type: 'post',
+            dataType: 'json',
+            cache: false,
+            data: { Fname: 'test11' }
+        }).done(function(data){
+            $("body").append("<p>AddForeignOK</p>");
+            $.ajax({
+                url: '/test/Add',
+                type: 'post',
+                dataType: 'json',
+                cache: false,
+                data: { ForeinKey: data, Name: "222", Fname:'test11' }
+            }).done(function (data1) {
+                $("body").append("<p>AddOK</p>");
+                $.ajax({
+                    url: '/test/Update',
+                    type: 'post',
+                    dataType: 'json',
+                    cache: false,
+                    data: { ForeinKey: data, Name: "222", Id: data1, Fname: 'test11' }
+                }).done(function (data) {
+                    $("body").append("<p>UpdateOK</p>");
+                }).fail(function () {
+                    $("body").append("<p>UpdateFailed</p>");
+                });
+            }).fail(function () {
+                $("body").append("<p>AddFailed</p>");
+            });
+        }).fail(function () {
+            $("body").append("<p>AddForeignFailed</p>");
+        });
+        
+        $.ajax({
+            url: '/test/GetAll',
+            type: 'get',
+            dataType: 'json',
+            cache: false,
+        }).done(function (data) {
+            $("body").append("<p>GetAllOK</p>" +JSON.stringify(data));
+        }).fail(function () {
+            $("body").append("<p>GetAllFailed</p>");
+        });
+    </script>
+   
+</body>
+</html>
