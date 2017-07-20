@@ -192,9 +192,14 @@ namespace Domain.Datas
                           .Take(pageCount);
             }
         }
+
+        public int GetCount()
+        {
+            return GetSet().Select(s => s.Id).Count();
+        }
         public int GetCount(System.Linq.Expressions.Expression<Func<TEntity, bool>> filter)
         {
-            return GetSet().Count(filter);
+            return GetSet().Where(filter).Select(s => s.Id).Count();
         }
 
         /// <summary>

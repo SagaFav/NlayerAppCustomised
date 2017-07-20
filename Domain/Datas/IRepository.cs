@@ -81,34 +81,12 @@ namespace Domain.Datas
         /// <returns>List of selected elements</returns>
         IEnumerable<TEntity> GetAll();
         IEnumerable<TEntity> GetAll(params string[] include);
-        /// <summary>
-        /// 分页查询
-        /// </summary>
-        /// <typeparam name="KProperty">对象属性</typeparam>
-        /// <param name="pageIndex">页码</param>
-        /// <param name="pageCount">页面大小</param>
-        /// <param name="filter">过滤条件</param>
-        /// <param name="includeExpression">要包含的依赖</param>
-        /// <param name="orderByExpression">排序属性</param>
-        /// <param name="ascending">是否倒序</param>
-        /// <returns></returns>
+
         IEnumerable<TEntity> GetPaged<KProperty>(int pageIndex, int pageCount, Expression<Func<TEntity, bool>> filter,  Expression<Func<TEntity, KProperty>> orderByExpression, bool ascending,string[] includeExpression);
-        /// <summary>
-        /// 获取数量
-        /// </summary>
-        /// <typeparam name="KProperty">对象属性</typeparam>
-        /// <param name="filter">过滤条件</param>
-        /// <returns></returns>
+
         int GetCount(System.Linq.Expressions.Expression<Func<TEntity, bool>> filter);
-        /// <summary>
-        /// 根据条件查询集合
-        /// </summary>
-        /// <typeparam name="KProperty">对象属性</typeparam>
-        /// <param name="filter">过滤条件</param>
-        /// <param name="includeExpression">要包含的依赖</param>
-        /// <param name="orderByExpression">排序属性</param>
-        /// <param name="ascending">是否倒序</param>
-        /// <returns></returns>
+        int GetCount();
+
         IEnumerable<TEntity> GetFiltered<KProperty>(Expression<Func<TEntity, bool>> filter,Expression<Func<TEntity, KProperty>> orderByExpression, bool ascending,params string[] includeExpression);
     }
 }
