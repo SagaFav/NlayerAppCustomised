@@ -43,6 +43,11 @@ namespace Domain.Datas
             mappingCollection.GenerateViews(new List<EdmSchemaError>());
             Database.SetInitializer(new DropCreateDatabaseIfModelChanges<MainUnitOfWork>());//保护数据建议使用数据库迁移工具
             Database.CreateIfNotExists();
+            //just for performance
+            this.Configuration.AutoDetectChangesEnabled = false;
+            this.Configuration.LazyLoadingEnabled = false;
+            this.Configuration.ProxyCreationEnabled = false;
+            this.Configuration.ValidateOnSaveEnabled = false;
         }
         #region IDbSet Members
         IDbSet<TestObjs> _testObj = null;
@@ -179,11 +184,7 @@ namespace Domain.Datas
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
-            //just for performance
-            this.Configuration.AutoDetectChangesEnabled = false;
-            this.Configuration.LazyLoadingEnabled = false;
-            this.Configuration.ProxyCreationEnabled = false;
-            this.Configuration.ValidateOnSaveEnabled = false;
+            
         }
         #endregion
 
