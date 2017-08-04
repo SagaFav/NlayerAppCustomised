@@ -24,7 +24,6 @@ namespace Application.TestModule
         }
         public void Update(TestDTO obj)
         {
-
             _repository.Modify(TestConvertor.ConvertToEntity(obj));
             _repository.UnitOfWork.Commit();
 
