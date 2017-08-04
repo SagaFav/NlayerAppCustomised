@@ -16,5 +16,6 @@ namespace Application.TestModule
         void Update(TestDTO obj);
         string Add(TestDTO obj);
         string AddTestForeign(TestForeign dto);
+        void Remove(string key);
     }
 }

@@ -24,10 +24,10 @@ namespace Application.TestModule
         }
         public void Update(TestDTO obj)
         {
-            var persist = _repository.Get(obj.Id);
-            obj.TestForeign = persist.TestForeign;
-            _repository.Merge(persist,obj);
+
+            _repository.Modify(TestConvertor.ConvertToEntity(obj));
             _repository.UnitOfWork.Commit();
+
         }
         public string Add(TestDTO obj)
         {
@@ -42,6 +42,23 @@ namespace Application.TestModule
             _repository.AddForeign(dto);
             _repository.UnitOfWork.Commit();
             return dto.Id;
+        }
+
+
+        public void Remove(string key)
+        {
+            try
+            {
+
+                var data = _repository.Get(key);
+                _repository.Remove(data);
+                _repository.UnitOfWork.Commit();
+            }
+            catch (Exception ex)
+            {
+
+            }
+
         }
     }
 }

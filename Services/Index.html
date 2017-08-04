@@ -32,6 +32,19 @@
                     data: { ForeinKey: data, Name: "222", Id: data1, Fname: 'test11' }
                 }).done(function (data) {
                     $("body").append("<p>UpdateOK</p>");
+
+                    $.ajax({
+                        url: '/test/Remove',
+                        type: 'get',
+                        dataType: 'json',
+                        data: { key: data1 },
+                        cache: false,
+                    }).done(function (data) {
+                        $("body").append("<p>RemoveOK</p>" );
+                    }).fail(function () {
+                        $("body").append("<p>RemoveFailed</p>");
+                    });
+
                 }).fail(function () {
                     $("body").append("<p>UpdateFailed</p>");
                 });

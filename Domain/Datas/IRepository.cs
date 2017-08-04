@@ -53,13 +53,6 @@ namespace Domain.Datas
         void Modify(TEntity item);
 
         /// <summary>
-        ///Track entity into this repository, really in UnitOfWork. 
-        ///In EF this can be done with Attach and with Update in NH
-        /// </summary>
-        /// <param name="item">Item to attach</param>
-        void TrackItem(TEntity item);
-
-        /// <summary>
         /// Sets modified entity into the repository. 
         /// When calling Commit() method in UnitOfWork 
         /// these changes will be saved into the storage

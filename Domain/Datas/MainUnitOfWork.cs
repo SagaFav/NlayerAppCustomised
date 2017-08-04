@@ -76,6 +76,15 @@ namespace Domain.Datas
             //attach and set as unchanged
             base.Entry<TEntity>(item).State = System.Data.Entity.EntityState.Unchanged;
         }
+        public void SetDetached<TEntity>(TEntity item)
+            where TEntity : class
+        {
+            base.Entry<TEntity>(item).State = System.Data.Entity.EntityState.Detached;
+        }
+        public void Attach<TEntity>(TEntity item) where TEntity : class
+        {
+            base.Set<TEntity>().Attach(item);
+        }
         /// <summary>
         /// 对象已添加到对象上下文，但尚未调用 System.Data.Objects.ObjectContext.SaveChanges() 方法；
         /// </summary>

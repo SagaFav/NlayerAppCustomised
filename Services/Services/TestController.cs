@@ -26,6 +26,11 @@ namespace Services
         {
             return _app.Getall();
         }
+        [HttpGet]
+        public void Remove(string key)
+        {
+             _app.Remove(key);
+        }
 
         [HttpPost]
         public string Add(TestDTO obj)

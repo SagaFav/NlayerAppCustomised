@@ -65,7 +65,6 @@ namespace Domain.Datas
                           .LogInfo("can not add null object",typeof(TEntity).ToString());
                 
             }
-            
         }
         /// <summary>
         /// <see cref="Microsoft.Samples.NLayerApp.Domain.Seedwork.IRepository{TValueObject}"/>
@@ -75,27 +74,9 @@ namespace Domain.Datas
         {
             if (item != (TEntity)null)
             {
-                //attach item if not exist
-                _UnitOfWork.SetUnchanged(item);
-
-                //set as "removed"
+                _UnitOfWork.Attach(item);
                 GetSet().Remove(item);
             }
-            else
-            {
-                LoggerFactory.CreateLog()
-                          .LogInfo("entity is null", typeof(TEntity).ToString());
-            }
-        }
-
-        /// <summary>
-        /// <see cref="Microsoft.Samples.NLayerApp.Domain.Seedwork.IRepository{TValueObject}"/>
-        /// </summary>
-        /// <param name="item"><see cref="Microsoft.Samples.NLayerApp.Domain.Seedwork.IRepository{TValueObject}"/></param>
-        public virtual void TrackItem(TEntity item)
-        {
-            if (item != (TEntity)null)
-                _UnitOfWork.SetUnchanged<TEntity>(item);
             else
             {
                 LoggerFactory.CreateLog()
@@ -110,7 +91,10 @@ namespace Domain.Datas
         public virtual void Modify(TEntity item)
         {
             if (item != (TEntity)null)
+            {
+                _UnitOfWork.Attach(item);
                 _UnitOfWork.SetModified(item);
+            }
             else
             {
                 LoggerFactory.CreateLog()
@@ -126,13 +110,13 @@ namespace Domain.Datas
         public virtual TEntity Get(string id)
         {
             if (!string.IsNullOrEmpty(id))
-                return GetSet().Find(id);
+                return GetSet().AsNoTracking().Where(s=>s.Id==id).FirstOrDefault();
             else
                 return null;
         }
         public virtual TEntity Get(string id,params string[] include)
         {
-            var set=GetSet();
+            var set = GetSet().AsNoTracking();
             if (!string.IsNullOrEmpty(id))
             {
                 IQueryable<TEntity> qry=set.AsQueryable();

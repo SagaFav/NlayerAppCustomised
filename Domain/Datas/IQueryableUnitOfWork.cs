@@ -38,6 +38,8 @@ namespace Domain.Datas
         /// <typeparam name="TValueObject">The type of entity</typeparam>
         /// <param name="item">The item <</param>
         void SetUnchanged<TEntity>(TEntity item) where TEntity : class;
+        void SetDetached<TEntity>(TEntity item) where TEntity : class;
+        void Attach<TEntity>(TEntity item) where TEntity : class;
         void SetAdded<TEntity>(TEntity item) where TEntity : class;
         void SetDeleted<TEntity>(TEntity item) where TEntity : class;
         /// <summary>
